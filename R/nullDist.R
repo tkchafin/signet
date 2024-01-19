@@ -68,8 +68,9 @@ nullDist <- function(pathways,
                 iterations = 1000
             ), silent=TRUE)
 
-            if(class(HSS)=="Signet") cond <- FALSE
-
+            if(class(HSS)=="Signet"){
+                if (!is.na(HSS@subnet_score)) cond <- FALSE
+            }
         }
 
         return(HSS@subnet_score)
