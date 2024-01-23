@@ -92,8 +92,13 @@ writeXGMML <- function(sigObj,
     } else {
 
         selec <- unlist(lapply(sigObj@results, function(x) {
-            if (is.na(x@p.value)) return(TRUE)
-            else return(x@p.value < threshold)
+            if (is.null(x@network)){
+                return(FALSE)
+            }else if (is.na(x@p.value)){
+                return(FALSE)
+            }else{
+                return(x@p.value < threshold)
+            }
         }))
 
         sigObj <- sigObj@results[selec]
